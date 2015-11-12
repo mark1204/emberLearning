@@ -1,9 +1,16 @@
 <div class="row list-wrapper">
 	<ul class="list-group songs">
+
+      <li class="list-group-item">
+        {{input type="text" class="new-song" placeholder="New song" value=title}}
+          <button class="btn btn-primary btn-sm new-song-button" {{action "createSong"}}>Add</button>
+      </li>
+
 		{{#each model.songs as |song|}}
 		<li class="list-group-item">
-			{{song.title}} by <em>{{song.band}}</em>
-			<span class="rating pull-right">{{song.rating}}</span>
+			{{song.title}} by <em>{{song.band.name}}</em>
+			{{star-rating item=song rating=song.rating on-click=(action "updateRating")}}
+
 		</li>
 		{{/each}}
 	</ul>

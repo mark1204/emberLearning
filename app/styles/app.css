@@ -37,7 +37,7 @@ html, body {
 }
 
 .new-band {
-width: 82%;
+width: 62%;
 }
 .new-band-button {
 float: right;
@@ -48,4 +48,8 @@ width: 50%;
 }
 .new-song-button {
 margin-left: 20px;
+}
+
+.rating-panel {
+  float: right;
 }
