@@ -11,8 +11,7 @@
 
         </div>
 
-
-		{{#each model.sortedContent as |band|}}
+        {{#each model as |band|}}
             {{#link-to "bands.band" band class="list-group-item band-link"}}
 		{{band.name}}
 		<span class="pointer glyphicon glyphicon-chevron-right"></span>

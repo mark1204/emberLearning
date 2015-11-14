@@ -24,6 +24,14 @@ export default Ember.Route.extend({
 
     },
 
+    save: function(){
+      var controller = this.get('controller'),
+          band = controller.get('model');
+
+      return band.save();
+
+    },
+
 
     didTransition: function(){
           var band = this.modelFor('bands.band');

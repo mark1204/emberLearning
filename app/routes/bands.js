@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import Song from '../models/song';
 import Band from '../models/band';
+/*
 
 var blackDog = Song.create({
   title: 'Black Dog',
@@ -41,17 +42,18 @@ yellowLedbetter.set('band', pearlJam);
 daughter.set('band', pearlJam);
 pretender.set('band', fooFighters);
 
+*/
 
 
 export default Ember.Route.extend({
 	model: function() {
-		return bands;
+		return this.store.findAll('band');
 	},
 
 	afterModel: function(model){
 	  var bands = model;
 
-	  if(bands.lenght ===1 ){
+	  if(bands.length ===1 ){
 	    this.transitionTo('bands.band', bands.get('firstObject'));
 	  }
 
@@ -64,11 +66,14 @@ export default Ember.Route.extend({
     },
 
     createBand: function(){
-      var name = this.get('controller').get('name');
-      var band = Band.create({name:name});
-      bands.get('content').pushObject(band);
-      this.get('controller').set('name', '');
-      this.transitionTo('bands.band.songs', band);
+      var route = this,
+          controller = this.get('controller');
+
+      var band = this.store.createRecord('band', controller.getProperties('name'));
+      band.save().then(function(){
+          controller.set('name', '');
+          route.transitionTo('bands.band.songs', band);
+      });
     }
 
   }
