@@ -62,8 +62,8 @@ import httpStubs from 'my-new-app/tests/helpers/http-stubs';
     server = new Pretender(function(){
 
       //return data format has problem. have not found resource online.
-      //httpStubs.stubBands(this, [{id: 1, attributes:{name: "Radiohead"}}])
-
+      httpStubs.stubBands(this, [{id: 1, attributes:{name: "Radiohead"}}])
+/*
       this.get('/bands', function(){
         var response = {
           data:[
@@ -73,7 +73,7 @@ import httpStubs from 'my-new-app/tests/helpers/http-stubs';
         };
 
         return [200, {"Content-Type": "application/vnd.api+json"},JSON.stringify(response)];
-      });
+      });*/
 
       this.post('/bands', function(){
 

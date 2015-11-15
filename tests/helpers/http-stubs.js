@@ -6,21 +6,22 @@ function songsUrlForBand(id){
 
 function responseItemForBand(data, id){
 
-  var bandId = id || data.id;
+  var bandId = id || data[0].id;
 
-  return {
-
-    id: bandId,
-    type: "bands",
-    attributes: data.attributes,
-    relationships:{
-      songs:{
-        links:{
-          related: songsUrlForBand(data.id)
+  return [
+    {
+      id: bandId,
+      type: "bands",
+      attributes: data.attributes,
+      relationships:{
+        songs:{
+          links:{
+            related: songsUrlForBand(data.id)
+          }
         }
       }
     }
-  };
+  ];
 }
 
 function responseItemForSong(data, id){
@@ -39,9 +40,11 @@ export default{
 
     //return data format has problem. have not found resource online.
     //how data.map works? how to check to debug test?
-    var response = data.map(function(band){
-      responseItemForBand(band);
+    /*var response = data.map(function(band){
+        return responseItemForBand(band);
     });
+*/
+    var response = responseItemForBand(data);
 
     pretender.get('/bands', function(){
       return [200, {"Content-Type":"application/vnd.api+json"}, JSON.stringify({data:response})];
