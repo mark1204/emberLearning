@@ -28,7 +28,7 @@
 
 
 		{{#each model.songs as |song|}}
-		<li class="list-group-item">
+		<li class="list-group-item song">
 			{{song.title}} by <em>{{song.band.name}}</em>
 			{{star-rating item=song rating=song.rating on-click=(action "updateRating")}}
 

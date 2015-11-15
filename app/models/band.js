@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import DS from 'ember-data';
 
 export default DS.Model.extend({
@@ -6,5 +5,5 @@ export default DS.Model.extend({
 
 	description: DS.attr(),
 
-  songs: DS.hasMany('song', {async:false})
+  songs: DS.hasMany('song', {async:true})
 });
