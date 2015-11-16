@@ -1,45 +1,48 @@
 import Ember from 'ember';
+//import wait from '../../../utils/wait';
 
+export default Ember.Route.extend({
 
+  model: function(){
+    //return wait(this.modelFor('bands.band'), 3000);
+    return this.modelFor('bands.band');
+  },
 
-	export default Ember.Route.extend({
+  actions: {
 
-		model: function(){
-			return this.modelFor('bands.band');
-		},
+    didTransition: function(){
+      var band = this.modelFor('bands.band');
+      document.title = `${band.get('name')} songs - Rock & Roll`;
 
-    actions: {
+    },
 
-      didTransition: function(){
-        var band = this.modelFor('bands.band');
-        document.title = `${band.get('name')} songs - Rock & Roll`;
+    createSong: function(){
+      var controller = this.get('controller'),
+          band = this.modelFor('bands.band');
 
-      },
+      var song = this.store.createRecord('song', {title: controller.get('title'), band:band});
 
+      song.save().then(function(){
+         controller.set('title', '');
+      });
+    },
 
-      createSong: function(){
-        var controller = this.get('controller'),
-            band = this.modelFor('bands.band');
+    updateRating: function(params){
+      var song = params.item,
+          rating = params.rating;
 
-        var song = this.store.createRecord('song', {title: controller.get('title'), band:band});
-
-        song.save().then(function(){
-           controller.set('title', '');
-        });
-      },
-
-      updateRating: function(params){
-        var song = params.item,
-            rating = params.rating;
-
-        if (song.get('rating') === rating) {
-            rating = 0;
-        }
-
-        song.set('rating',rating);
-
-        song.save();
+      if (song.get('rating') === rating) {
+          rating = 0;
       }
-    }
 
-	});
+      song.set('rating',rating);
+
+      song.save();
+    },
+
+    /*loading: function() {
+      window.alert("Loading the band's songs, ok?");
+    }*/
+  }
+
+});

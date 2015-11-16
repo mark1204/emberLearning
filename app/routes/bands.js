@@ -1,7 +1,10 @@
 import Ember from 'ember';
 
+//import wait from '../utils/wait';
+
 export default Ember.Route.extend({
 	model: function() {
+		//return wait(this.store.findAll('band'), 3000);
 		return this.store.findAll('band');
 	},
 

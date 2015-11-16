@@ -38,9 +38,9 @@ export default{
 
     var response = [];
 
-    data.map(function(band, index, data){
+    data.map(function(band){
         var b = responseItemForBand(band);
-        response[index] = b;
+        response.addObject(b);
     });
 
     //var response = responseItemForBand(data);
@@ -54,9 +54,9 @@ export default{
 
     var response = [];
 
-    data.map(function(song, index, data){
+    data.map(function(song){
       var s = responseItemForSong(song);
-      response[index] = s;
+      response.addObject(s);
     });
 
     pretender.get(songsUrlForBand(bandId), function() {
@@ -84,4 +84,4 @@ export default{
     });
   }
 
-}
+};

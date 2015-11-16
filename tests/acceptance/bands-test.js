@@ -13,8 +13,11 @@ import httpStubs from 'my-new-app/tests/helpers/http-stubs';
 
     afterEach: function() {
       Ember.run(this.application, 'destroy');
+
+      /* jshint ignore:start */
       if(server)
         server.shutdown();
+      /* jshint ignore:end */
     }
   });
 
@@ -61,33 +64,9 @@ import httpStubs from 'my-new-app/tests/helpers/http-stubs';
 
     server = new Pretender(function(){
 
-      httpStubs.stubBands(this, [{id: 1, attributes:{name: "Radiohead"}}])
-/*
-      this.get('/bands', function(){
-        var response = {
-          data:[
-            {id:1, type:"bands", attributes:{name: "Radiohead"}}
-          ]
-
-        };
-
-        return [200, {"Content-Type": "application/vnd.api+json"},JSON.stringify(response)];
-      });*/
+      httpStubs.stubBands(this, [{id: 1, attributes:{name: "Radiohead"}}]);
 
       httpStubs.stubCreateBand(this, 2);
-
-     /* this.post('/bands', function(){
-
-        var response = {
-            data:[
-               {id:2, type:"bands", attributes:{name: "Long Distance Calling"}},
-            ]
-
-        };
-
-        return [200, {"Content-Type": "application/vnd.api+json"},JSON.stringify(response)];
-
-      });*/
 
     });
 
