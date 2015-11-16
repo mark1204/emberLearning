@@ -1,8 +1,15 @@
-export default Ember.Route.extend({
-	model: function() {
-		
-		var bands = this.modelFor('bands');
+import Ember from 'ember';
 
-		return bands.get('content').findBy('slug', params.slug);
+export default Ember.Route.extend({
+	model: function(params) {
+
+		//var bands = this.modelFor('bands');
+    console.log('sdfdsfdsf');
+		console.debug("Model hook called for 'bands.band' called with " + params.id);
+
+		return this.store.findRecord('band', params.id);
 	}
+
+
+
 });

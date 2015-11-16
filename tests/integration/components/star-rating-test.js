@@ -22,5 +22,5 @@ test('it renders', function(assert) {
     {{/star-rating}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim(), '');
 });
