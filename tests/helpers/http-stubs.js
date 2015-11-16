@@ -55,7 +55,7 @@ export default{
     var response = [];
 
     data.map(function(song, index, data){
-      var s = responseItemForSong(song)
+      var s = responseItemForSong(song);
       response[index] = s;
     });
 
