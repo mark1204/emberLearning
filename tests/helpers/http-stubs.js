@@ -6,22 +6,20 @@ function songsUrlForBand(id){
 
 function responseItemForBand(data, id){
 
-  var bandId = id || data[0].id;
+  var bandId = id || data.id;
 
-  return [
-    {
+  return {
       id: bandId,
       type: "bands",
       attributes: data.attributes,
       relationships:{
         songs:{
           links:{
-            related: songsUrlForBand(data.id)
+            related: songsUrlForBand(bandId)
           }
         }
       }
-    }
-  ];
+    };
 }
 
 function responseItemForSong(data, id){
@@ -38,13 +36,14 @@ export default{
 
   stubBands: function(pretender, data){
 
-    //return data format has problem. have not found resource online.
-    //how data.map works? how to check to debug test?
-    /*var response = data.map(function(band){
-        return responseItemForBand(band);
+    var response = [];
+
+    data.map(function(band, index, data){
+        var b = responseItemForBand(band);
+        response[index] = b;
     });
-*/
-    var response = responseItemForBand(data);
+
+    //var response = responseItemForBand(data);
 
     pretender.get('/bands', function(){
       return [200, {"Content-Type":"application/vnd.api+json"}, JSON.stringify({data:response})];
@@ -52,8 +51,12 @@ export default{
   },
 
   studSongs: function(pretender, bandId, data){
-    var response = data.map(function(song){
-      return responseItemForSong(song);
+
+    var response = [];
+
+    data.map(function(song, index, data){
+      var s = responseItemForSong(song)
+      response[index] = s;
     });
 
     pretender.get(songsUrlForBand(bandId), function() {
@@ -63,8 +66,14 @@ export default{
 
   stubCreateBand: function(pretender, newId) {
     pretender.post('/bands', function(request) {
-      var response = [ responseItemForBand(JSON.parse(request.requestBody), newId) ];
+      var response = responseItemForBand(JSON.parse(request.requestBody), newId);
       return [200, {"Content-Type": "application/vnd.api+json"}, JSON.stringify({ data: response }) ];
+    });
+
+    //Need set a handler for /bands/2/songs.
+    var responseForSongs = [];
+    pretender.get(songsUrlForBand(newId), function() {
+      return [200, {"Content-Type": "application/vnd.api+json"}, JSON.stringify({ data: responseForSongs }) ];
     });
   },
 
