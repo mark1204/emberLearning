@@ -1,6 +1,7 @@
 /* jshint node: true */
-var contentSecurityPolicy = { 'default-src': "'none'", 'script-src': "'self'", 'font-src': "'self'",
-'connect-src': "'self' http:*json-api.rockandrollwithemberjs.com:*",
+var contentSecurityPolicy = {
+  'default-src': "'none'", 'script-src': "'self'", 'font-src': "'self'",
+  'connect-src': "'self' http://json-api.rockandrollwithemberjs.com",
   'img-src': "'self'",
   'style-src': "'self' 'unsafe-inline'",
   'media-src': "'self'"

@@ -11,12 +11,12 @@
             </button>
         {{/if}}
         <div class="clearfix"></div>
-        {{#if isEditing}}
+        {{#liquid-if isEditing}}
             <div class="form-group">
                 {{textarea class="form-control" value=model.description}}
             </div>
         {{else}}
             <p>{{model.description}}</p>
-        {{/if}}
+        {{/liquid-if}}
     </div>
 </div>
