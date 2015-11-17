@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import {capitalize} from '../../../helpers/capitalize';
 
 export default Ember.Controller.extend({
 
@@ -47,6 +48,11 @@ export default Ember.Controller.extend({
   isAddButtonDisabled: Ember.computed('title', function(){
     return Ember.isEmpty(this.get('title'));
 
+  }),
+
+  newSongPlaceholder: Ember.computed('model.name', function(){
+    var bandName = this.get('model.name');
+    return `New ${capitalize(bandName)} song`;
   }),
 
   actions: {
