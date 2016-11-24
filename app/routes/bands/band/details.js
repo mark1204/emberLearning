@@ -35,8 +35,10 @@ export default Ember.Route.extend({
 
     didTransition: function(){
           var band = this.modelFor('bands.band');
-          document.title = `${band.get('name')} songs - Rock & Roll`;
 
+          if(band.name) {
+            document.title = `${band.get('name')} songs - Rock & Roll`;
+          }
         }
 
   }

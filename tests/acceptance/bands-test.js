@@ -23,6 +23,14 @@ import httpStubs from 'my-new-app/tests/helpers/http-stubs';
   test('visiting /bands', function(assert) {
     visit('/bands');
 
+    server = new Pretender(function(){
+
+      httpStubs.stubBands(this, [{id: 1, attributes:{name: "Radiohead"}}]);
+
+      httpStubs.stubCreateBand(this, 2);
+
+    });
+
     andThen(function() {
       assert.equal(currentURL(), '/bands');
     });
